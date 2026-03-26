@@ -33,6 +33,8 @@
 
     <br><br>
 
+    @include('partials.alerts')
+
     <table border="1">
         <thead>
             <tr>
