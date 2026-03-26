@@ -1,6 +1,7 @@
 @if(session('success'))
     <div class="alert alert-success alert-dimissible d-flex align-items-center fade show">
-
+        <i class="fa-solid fa-circle-check"></i>
+    <strong class="mx-2">EXITO</strong> {{session('success')}}
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 

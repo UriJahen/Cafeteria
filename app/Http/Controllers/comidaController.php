@@ -46,6 +46,7 @@ class comidaController extends Controller
 
         $comida->update($request->all());
 
+        
         return redirect()->route('comida.index')->with('success', 'Comida actualizada con éxito');
     }
 
