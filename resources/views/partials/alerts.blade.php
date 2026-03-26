@@ -16,7 +16,7 @@
 
                 setTimeout(() => alerta.remove(), 500);
             }
-        }, 5000)
+        }, 5000);
     </script>
 
 @endif
