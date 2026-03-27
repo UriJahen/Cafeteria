@@ -10,6 +10,7 @@
 
     @extends('layout.app')
     @section('content')
+    @include('partials.alerts')
 
     <form action="{{ route('comida.store') }}" method="POST">
         @csrf

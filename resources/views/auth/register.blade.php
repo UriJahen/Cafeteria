@@ -8,6 +8,8 @@
 <body>
     @extends('layout.app')
     @section('content')
+    @include('partials.alerts')
+
         <h1>Registro</h1>
         <form action="{{route('registro.store')}}" method = "POST">
             @csrf
@@ -22,6 +24,7 @@
             <br>
             <input type="password" name="password_confirmation" placeholder="confirmar contraseña" class="form-control" required> 
             <br>
+        
         
 <!--nota para la ed por que si no me pierdo, esta parte de aqui es la adaptacion para que solo un admin pueda registrar otro admin y toca modificar el controlador de authcontroller-->
             @auth 

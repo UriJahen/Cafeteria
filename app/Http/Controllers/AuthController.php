@@ -22,12 +22,30 @@ class AuthController extends Controller
 
     //metodo para registrar  los usuarios
     public function register(Request $request){
-        $request->validate([
+        //$request->validate([
+          //  'name' => 'required',
+            //'email' => 'required|email|unique:users,email',    
+            //'phone' => 'required',
+            //'password' => 'required|min:8|confirmed'
+        //]);
+
+        
+        $validator = validator($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',    
+            'email' => 'required|email|unique:users,email',
             'phone' => 'required',
             'password' => 'required|min:8|confirmed'
+        ], [
+            'email.unique' => 'Este correo electrónico ya está registrado con otra cuenta.',
         ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator) // Mantiene los errores en los inputs
+                ->withInput()            // No borra lo que el usuario escribió
+                ->with('error', $validator->errors()->first()); // Envía el primer error a tu alerta roja
+        }
+
 
         //si todo ta bien ya abre cambiado lo de  y esto de aqui es la logica de seguridad para lo del campo de admin
         //y con esto ya solo si  el usuario es autenticado y es admin va a poder asignar el  rol de admin a otro ... si todo sale bien ps
@@ -84,15 +102,16 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
         //intentar reañizar el inicio de sesion con la informacion del formulario 
         if(Auth::attempt($data))
         {
             //ruta para enviar al usuario cuando se incia la sesion
             return redirect()->route('comida.index');
         }
-        return back()->withErrors([
-            'email' => 'Credenciales incorrectas',
-        ]);
+        
+        return back()->with('error', 'Credenciales incorrectas');
+        
         }
         //metodo para cerrar sesion
         public function logout(Request $request){
