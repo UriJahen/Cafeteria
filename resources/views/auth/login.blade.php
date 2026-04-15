@@ -8,6 +8,8 @@
 <body>
     @extends('layout.app')
     @section('content')
+    @include('partials.alerts')
+    
     <h1>Inicio de sesion</h1>
 
     <form action="{{route ('acceso.store')}}" method="Post">

@@ -9,6 +9,7 @@
 
     @extends('layout.app')
     @section('content')
+    @include('partials.alerts')
 
     <h1>EDITAR COMIDA: {{$comida->nombre}}</h1>
     

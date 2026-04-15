@@ -8,6 +8,8 @@
 <body>
     @extends('layout.app')
     @section('content')
+    @include('partials.alerts')
+    
         <h1>Panel admin</h1>
         <form action="{{route ('registro.store')}}">
             <button type="submit" class="btn btn-success m-3">Registrar</button>

@@ -8,6 +8,7 @@
 <body>
     @extends('layout.app')
     @section('content')
+    @include('partials.alerts')
 
 
 
@@ -33,8 +34,7 @@
 
     <br><br>
 
-    @include('partials.alerts')
-
+    
     <table border="1">
         <thead>
             <tr>
