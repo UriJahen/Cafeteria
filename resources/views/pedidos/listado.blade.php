@@ -41,6 +41,7 @@
                             <i class="fa-solid fa-pen-to-square"></i> Editar
                         </a>
 
+                         @if(auth()->user()->is_admin)
                         <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
@@ -48,6 +49,7 @@
                                 <i class="fa-solid fa-trash"></i> Borrar
                             </button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
