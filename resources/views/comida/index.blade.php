@@ -35,6 +35,10 @@
         <a href="{{route('comida.create')}}" class="btn btn-success mb-3 me-3">
            <i class="fa-solid fa-plus"></i> Nueva comida 
         </a>
+
+        <a href="{{ route('pedidos.index') }}" class="btn btn-primary mb-3 me-3">
+        <i class="fa-solid fa-clipboard-list"></i> Gestionar Pedidos
+        </a>
         
         <form action="{{ route('cerrar') }}" method="POST" class="me-3">
             @csrf
