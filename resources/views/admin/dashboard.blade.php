@@ -18,7 +18,10 @@
 
         <form action="{{route ('usuarios')}}">
             <button type="submit" class="btn btn-success m-3">Editar Usuarios</button>
+        </form>
 
+        <form action="{{route ('pedidos.index')}}">
+            <button type="submit" class="btn btn-success m-3">Gestion de pedidos</button>
         </form>
 
 

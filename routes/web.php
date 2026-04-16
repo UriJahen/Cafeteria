@@ -8,6 +8,40 @@ use App\Http\Controllers\ComidaController;
 
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\PedidoController;
+
+Route::middleware(['auth'])->group(function () {
+    // Rutas para que cualquier usuarios haga las ediciones 
+    Route::get('/pedidos', [
+        PedidoController::class, 'index'
+    ])->name('pedidos.index');
+
+
+    // ruta de la creacion 
+    Route::get('/pedidos/crear', [
+        PedidoController::class, 'create'
+    ])->name('pedidos.create');
+
+    Route::post('/pedidos', [
+        PedidoController::class, 'store'
+    ])->name('pedidos.store');
+
+    //ruta para editar
+    Route::get('/pedidos/{id}/editar', [
+        PedidoController::class, 'edit'
+    ])->name('pedidos.edit');
+
+    //ruta para actualizar
+    Route::put('/pedidos/{id}', [
+        PedidoController::class, 'update'
+    ])->name('pedidos.update');
+
+    // Ruta protegida de la eliminaccion solo para el admin
+    Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])
+        ->name('pedidos.destroy')
+        ->middleware('admin'); 
+});
+
 
 Route::get('/clima', [ComidaController::class, 'home']);
 

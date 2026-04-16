@@ -54,6 +54,10 @@ class comidaController extends Controller
 
     public function destroy(comida $comida)
     {
+
+        if (!auth()->user()->is_admin) {
+        return back()->with('error', 'Solo el administrador puede eliminar registros.');}
+
         $comida->delete();
         return redirect()->route('comida.index')->with('success', 'Comida eliminada con éxito');
     }
