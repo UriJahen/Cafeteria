@@ -12,7 +12,49 @@ class comidaController extends Controller
     public function index()
     {
         $comida = comida::all();
-        return view('comida.index', compact('comida'));
+        
+        // Lógica del clima para la recomendación
+        $apiKey = config('services.openweather.key');
+        $ciudad = "Jiutepec";
+        $datos = null;
+        $comidaRecomendada = null;
+        $motivoRecomendacion = "";
+        $temperatura = null;
+
+        try {
+            $response = Http::get("https://api.openweathermap.org/data/2.5/weather", [
+                'q' => $ciudad,
+                'appid' => $apiKey,
+                'units' => 'metric',
+                'lang' => 'es'
+            ]);
+
+            if ($response->successful()) {
+                $datos = $response->json();
+                $temperatura = $datos['main']['temp'];
+
+                if ($temperatura < 20) {
+                    $comidaRecomendada = comida::whereIn('tipo', ['bebida caliente', 'sopa', 'café', 'té'])
+                        ->inRandomOrder()->first();
+                    $motivoRecomendacion = "Hoy hace frío, te sugerimos que recomiendes a tus clientes algo caliente.";
+                } elseif ($temperatura >= 20 && $temperatura < 25) {
+                    $comidaRecomendada = comida::inRandomOrder()->first();
+                    $motivoRecomendacion = "El clima es agradable, cualquier opción del menú es excelente hoy.";
+                } else {
+                    $comidaRecomendada = comida::whereIn('tipo', ['ensalada', 'bebida fría', 'jugo', 'smoothie'])
+                        ->inRandomOrder()->first();
+                    $motivoRecomendacion = "Hoy hace calor, te sugerimos que recomiendes a tus clientes algo fresco.";
+                }
+
+                if (!$comidaRecomendada) {
+                    $comidaRecomendada = comida::inRandomOrder()->first();
+                }
+            }
+        } catch (\Exception $e) {
+            // Si falla la API, simplemente no mostramos la recomendación o mostramos una genérica
+        }
+
+        return view('comida.index', compact('comida', 'datos', 'comidaRecomendada', 'motivoRecomendacion', 'temperatura'));
     }
 
     public function create()
@@ -58,21 +100,6 @@ class comidaController extends Controller
         return redirect()->route('comida.index')->with('success', 'Comida eliminada con éxito');
     }
 
-    public function home()
-    {
-        $apiKey = config('services.openweather.key');
-        $ciudad = "Jiutepec";
 
-        $response = Http::get("https://api.openweathermap.org/data/2.5/weather", [
-            'q' => $ciudad,
-            'appid' => $apiKey,
-            'units' => 'metric',
-            'lang' => 'es'
-        ]);
-
-        $datos = $response->json();
-
-        return view('comida.sug', compact('datos'));
-    }
 
 }
