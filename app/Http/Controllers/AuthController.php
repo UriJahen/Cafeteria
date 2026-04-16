@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Mail\AvisoGeneralCorreo;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -175,6 +177,22 @@ class AuthController extends Controller
             return redirect()->route('usuarios')->with('warning', 'El registro del usuario ha sido eliminado del sistema.');
         }
 
+        //metodo para poder enviar el correo de aviso
+        public function enviarAviso(Request $request, $id)
+        {
+            $user = User::findOrFail($id);
+            
+            // Validamos que el administrador haya escrito un mensaje
+            $request->validate([
+                'mensaje' => 'required|string|min:5'
+            ]);
 
-       
+            $mensaje = $request->mensaje;
+
+            // Enviamos el correo al usuario seleccionado
+            Mail::to($user->email)->send(new AvisoGeneralCorreo($user, $mensaje));
+
+            return back()->with('success', '¡Aviso enviado correctamente al correo de ' . $user->name . '!');
+        }
+        
 }

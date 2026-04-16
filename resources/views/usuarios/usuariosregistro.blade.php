@@ -51,6 +51,18 @@
                         </button>
                     </form>
 
+                    <hr>
+
+                    <form action="{{ route('usuarios.enviarAviso', $item->id) }}" method="POST">
+                        @csrf
+                        <div class="input-group input-group-sm mt-1">
+                            <input type="text" name="mensaje" class="form-control" placeholder="Escribir aviso..." required>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fa-solid fa-paper-plane"></i> Enviar
+                            </button>
+                        </div>
+                    </form>
+
                 </td>
             </tr>
             @endforeach

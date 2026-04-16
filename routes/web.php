@@ -73,6 +73,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         AuthController::class, 'adminDashboard'
     ])->name('admin.dashboard');
 
+
+// Ruta para enviar el aviso personalizado
+Route::post('/usuarios/{id}/enviar-aviso', [
+    AuthController::class, 'enviarAviso'
+])->name('usuarios.enviarAviso');
+
 });
 
 
