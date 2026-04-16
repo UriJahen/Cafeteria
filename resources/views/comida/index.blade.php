@@ -10,7 +10,7 @@
     @section('content')
     @include('partials.alerts')
 
-    <!-- Sección de Recomendación Basada en el Clima -->
+    <!--Recomendación de acuerdo en el Clima -->
     @if($datos && $comidaRecomendada)
     <div class="alert alert-info shadow-sm mb-4" style="border-left: 5px solid #0dcaf0;">
         <div class="d-flex align-items-center">
@@ -82,9 +82,11 @@
                             <form action="{{ route('comida.destroy', $item->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar registro?')">
-                                    <i class="fa-solid fa-trash"></i> Eliminar
-                                </button>
+                                @if(auth()->user()->is_admin)
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar registro?')">
+                                        <i class="fa-solid fa-trash"></i> Eliminar
+                                    </button>
+                                 @endif
                             </form>
                         </div>
                     </td>
