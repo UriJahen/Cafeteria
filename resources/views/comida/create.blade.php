@@ -35,6 +35,11 @@
             <input type="number" step="0.01" name="precio" placeholder="Precio" required class="form-control">
         </div>
 
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-book"></i></span>
+            <input type="text" name="clima" placeholder="Clima" class="form-control">
+        </div>
+
         <button type="submit">Crear</button>
     </form>
     

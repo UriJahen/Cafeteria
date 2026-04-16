@@ -1,0 +1,164 @@
+/* Estética Premium Café & Crema - Versión Final */
+:root {
+    --cafe-oscuro: #4e342e;
+    --cafe-medio: #795548;
+    --cafe-claro: #a1887f;
+    --crema-fondo: #f5f5dc;
+    --crema-tarjeta: #fffaf0;
+    --borde-cafe: #d7ccc8;
+    --texto-principal: #3e2723;
+    --blanco: #ffffff;
+    --sombra: rgba(78, 52, 46, 0.15);
+}
+
+/* Estilos Base */
+body {
+    background: linear-gradient(135deg, var(--crema-fondo) 0%, #e3d5b8 100%);
+    color: var(--texto-principal);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background-color: var(--crema-tarjeta) !important;
+    border: 2px solid var(--cafe-medio) !important;
+    border-radius: 20px;
+    padding: 40px !important;
+    margin: 40px auto !important;
+    box-shadow: 0 10px 30px var(--sombra);
+    max-width: 1100px;
+}
+
+/* Encabezados y Secciones */
+.header-section {
+    background: linear-gradient(90deg, var(--cafe-oscuro), var(--cafe-medio));
+    color: var(--blanco);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px var(--sombra);
+}
+
+.header-section h1 {
+    color: var(--blanco) !important;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Botones Personalizados (Sin Azules) */
+.btn {
+    border-radius: 10px;
+    padding: 8px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-primary, .btn-secondary {
+    background-color: var(--cafe-medio) !important;
+    color: var(--blanco) !important;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    background-color: var(--cafe-oscuro) !important;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background-color: #388e3c !important;
+    color: white !important;
+}
+
+.btn-danger {
+    background-color: #d32f2f !important;
+    color: white !important;
+}
+
+.btn-warning {
+    background-color: #ffa000 !important;
+    color: white !important;
+}
+
+.btn-light {
+    background-color: var(--crema-tarjeta) !important;
+    color: var(--cafe-oscuro) !important;
+}
+
+.btn-outline-light {
+    border: 1px solid white !important;
+    color: white !important;
+}
+
+.btn-outline-light:hover {
+    background-color: white !important;
+    color: var(--cafe-oscuro) !important;
+}
+
+/* Tarjetas de Recomendación (Estructura del usuario) */
+.recommendation-card {
+    background-color: white;
+    border-left: 8px solid var(--cafe-medio);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 35px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.recommendation-title {
+    color: var(--cafe-oscuro);
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.weather-badge {
+    background-color: var(--cafe-oscuro);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.platillo-destacado {
+    font-weight: bold;
+    color: var(--cafe-medio);
+    font-size: 1.1rem;
+}
+
+/* Tablas Elegantes */
+.table {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid var(--borde-cafe);
+}
+
+.table thead {
+    background-color: var(--cafe-medio);
+    color: white;
+}
+
+.table thead th {
+    padding: 18px;
+    border: none;
+}
+
+.table tbody td {
+    padding: 18px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--borde-cafe);
+}
+
+/* Utilidades */
+.text-cafe { color: var(--cafe-oscuro); }
+.text-brown { color: var(--cafe-oscuro); }
+.fw-bold { font-weight: 700 !important; }
+.shadow-sm { box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important; }
