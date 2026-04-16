@@ -13,6 +13,12 @@
         <h1>Panel admin</h1>
         <form action="{{route ('registro.store')}}">
             <button type="submit" class="btn btn-success m-3">Registrar</button>
+
+        </form>
+
+        <form action="{{route ('usuarios')}}">
+            <button type="submit" class="btn btn-success m-3">Editar Usuarios</button>
+
         </form>
 
 

@@ -8,9 +8,10 @@
 <body>
     @extends('layout.app')
     @section('content')
+    @include('partials.alerts')
     <h1>Editar Usuario: {{$user->name}}</h1>
 
-    <form action="{{route('registro.update', $user->id)}}" method='POST'>
+    <form action="{{route('usuarios.update', $user->id)}}" method='POST'>
         @csrf
         @method('PUT')
 
@@ -30,11 +31,6 @@
             <input type="text" name="phone" placeholder="Telefono" value="{{$user->phone}}">
         </div>
         
-        <div>
-            <label>Contraseña:</label>
-            <input type="password" name="password" placeholder="Contraseña" value="{{$user->password}}">
-        </div>
-
         <button type="submit">Guardar Cambios</button>
     </form>
     

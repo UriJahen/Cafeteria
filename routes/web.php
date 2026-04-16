@@ -36,6 +36,27 @@ Route::get('/acceso', [
     AuthController::class, 'loginForm'
 ])->name('acceso');
 
+//Ruta para la edicion de usuario
+Route::get('/usuarios/{id}/editar', [
+    AuthController::class, 'edit'
+])->name('usuarios.edit');
+
+//ruta para la muestra de usuarios
+Route::get('/usuarios', [
+    AuthController::class, 'index'
+])->name('usuarios');
+
+//ruta para actualizar usuario
+Route::put('/usuarios/{id}', [
+    AuthController::class, 'update'
+])->name('usuarios.update');
+
+//ruta para eliminar usuario
+Route::delete('/usuarios/{id}', [
+    AuthController::class, 'destroy'
+])->name('usuarios.destroy');
+
+
 //ruta para iniciar sesion
 Route::post('/acceso', [
     AuthController::class, 'login'

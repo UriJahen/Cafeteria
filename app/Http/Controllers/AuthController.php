@@ -127,5 +127,54 @@ class AuthController extends Controller
         public function admindashboard(){
             return view('admin.dashboard');
         }
+
+        
+
+        // Método para mostrar la lista de usuarios
+        public function index()
+        {
+            $user = User::all();
+            return view('usuarios.usuariosregistro', compact('user'));
+        }
+
+        // Método para mostrar el formulario de edición de un usuario específico
+        public function edit($id)
+        {
+            $user = User::findOrFail($id);
+            return view('usuarios.editar', compact('user'));
+        }
+
+        // Método para procesar la actualización de los datos
+        public function update(Request $request, $id)
+        {
+            $user = User::findOrFail($id);
+
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,' . $id,
+                'phone' => 'required',
+            ]);
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+
+            // Solo actualiza la contraseña si el usuario escribió algo en el campo
+
+
+            $user->save();
+
+            return redirect()->route('usuarios')->with('success', 'Usuario actualizado correctamente.');
+        }
+
+        // Método para eliminar un usuario
+        public function destroy($id)
+        {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect()->route('usuarios')->with('warning', 'El registro del usuario ha sido eliminado del sistema.');
+        }
+
+
        
 }
