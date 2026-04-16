@@ -18,11 +18,15 @@
                 <i class="fa-solid fa-cloud-sun fa-2x text-info"></i>
             </div>
             <div>
-                <h5 class="mb-1"><strong>{{ $datos['name'] }}: {{ round($temperatura) }}°C</strong></h5>
+                <h5 class="mb-1">
+                    <strong>{{ $datos['name'] }}: {{ round($temperatura) }}°C</strong>
+                </h5>
                 <p class="mb-0">
                     {{ $motivoRecomendacion }} 
                     Hoy te sugerimos destacar: <strong>{{ $comidaRecomendada->nombre }}</strong> 
-                    <span class="badge bg-info text-dark ms-2">${{ number_format($comidaRecomendada->precio, 2) }}</span>
+                    <span class="badge bg-info text-dark ms-2">
+                        ${{ number_format($comidaRecomendada->precio, 2) }}
+                    </span>
                 </p>
             </div>
         </div>

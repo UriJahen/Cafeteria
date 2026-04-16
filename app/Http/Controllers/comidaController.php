@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Http;
 
 class comidaController extends Controller
 {
+
     public function index()
     {
         $comida = comida::all();
-        
-        // Lógica del clima para la recomendación
+
         $apiKey = config('services.openweather.key');
-        $ciudad = "Jiutepec";
+        $ciudad = "Cuernavaca";
         $datos = null;
         $comidaRecomendada = null;
         $motivoRecomendacion = "";
@@ -33,28 +33,35 @@ class comidaController extends Controller
                 $datos = $response->json();
                 $temperatura = $datos['main']['temp'];
 
+                $query = comida::query();
+
                 if ($temperatura < 20) {
-                    $comidaRecomendada = comida::whereIn('tipo', ['bebida caliente', 'sopa', 'café', 'té'])
-                        ->inRandomOrder()->first();
-                    $motivoRecomendacion = "Hoy hace frío, te sugerimos que recomiendes a tus clientes algo caliente.";
-                } elseif ($temperatura >= 20 && $temperatura < 25) {
-                    $comidaRecomendada = comida::inRandomOrder()->first();
-                    $motivoRecomendacion = "El clima es agradable, cualquier opción del menú es excelente hoy.";
+                    $query->where('clima', 'caliente');
+                    $motivoRecomendacion = "Hoy hace frío, te sugerimos algo caliente.";
+                } elseif ($temperatura > 30) {
+                    $query->where('clima', 'frio');
+                    $motivoRecomendacion = "Hoy hace calor, te sugerimos algo fresco.";
                 } else {
-                    $comidaRecomendada = comida::whereIn('tipo', ['ensalada', 'bebida fría', 'jugo', 'smoothie'])
-                        ->inRandomOrder()->first();
-                    $motivoRecomendacion = "Hoy hace calor, te sugerimos que recomiendes a tus clientes algo fresco.";
+                    $motivoRecomendacion = "El clima es templado, cualquier opción es buena.";
                 }
+
+                $comidaRecomendada = $query->inRandomOrder()->first();
 
                 if (!$comidaRecomendada) {
                     $comidaRecomendada = comida::inRandomOrder()->first();
                 }
             }
         } catch (\Exception $e) {
-            // Si falla la API, simplemente no mostramos la recomendación o mostramos una genérica
+            // opcional: log
         }
 
-        return view('comida.index', compact('comida', 'datos', 'comidaRecomendada', 'motivoRecomendacion', 'temperatura'));
+        return view('comida.index', compact(
+            'comida',
+            'datos',
+            'comidaRecomendada',
+            'motivoRecomendacion',
+            'temperatura'
+        ));
     }
 
     public function create()
