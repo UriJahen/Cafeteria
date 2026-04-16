@@ -9,6 +9,7 @@ use App\Http\Controllers\ComidaController;
 use App\Http\Controllers\AuthController;
 
 
+Route::get('/clima', [ComidaController::class, 'home']);
 
 Route::get('/', function () {
     return view('welcome');

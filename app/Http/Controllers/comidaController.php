@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\comida;
 
+use Illuminate\Support\Facades\Http;
+
 class comidaController extends Controller
 {
     public function index()
@@ -55,4 +57,22 @@ class comidaController extends Controller
         $comida->delete();
         return redirect()->route('comida.index')->with('success', 'Comida eliminada con éxito');
     }
+
+    public function home()
+    {
+        $apiKey = config('services.openweather.key');
+        $ciudad = "Jiutepec";
+
+        $response = Http::get("https://api.openweathermap.org/data/2.5/weather", [
+            'q' => $ciudad,
+            'appid' => $apiKey,
+            'units' => 'metric',
+            'lang' => 'es'
+        ]);
+
+        $datos = $response->json();
+
+        return view('comida.sug', compact('datos'));
+    }
+
 }
